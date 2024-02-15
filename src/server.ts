@@ -5,6 +5,8 @@ import morgan from "morgan";
 import cors from "cors";
 import { ConfigServer } from "./libs";
 
+const PORT = process.env.PORT || 3000
+
 class ServerBootstrap extends ConfigServer {
   public app: express.Application = express();
   private port: number = this.getNumberEnv("PROD_DB_PORT");
@@ -25,9 +27,12 @@ class ServerBootstrap extends ConfigServer {
   }
 
   public listen() {
-    this.app.listen(this.port, () => {
-      console.log(`Server running on port ${this.port}`);
-    });
+    this.app.listen(PORT, () => {
+        console.log(`Server running on port ${ PORT }`);
+    })
+    // this.app.listen(this.port, () => {
+    //   console.log(`Server running on port ${this.port}`);
+    // });
   }
 
   async dbConnect(): Promise<DataSource | void> {
