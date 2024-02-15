@@ -1,18 +1,40 @@
 import "reflect-metadata";
-import { AppDataSource } from "./data-source";
 import express from "express";
+import { DataSource } from "typeorm";
+import morgan from "morgan";
+import cors from "cors";
+import { ConfigServer } from "./libs";
 
-const app = express();
-const cors = require("cors");
+class ServerBootstrap extends ConfigServer {
+  public app: express.Application = express();
+  private port: number = this.getNumberEnv("PORT");
 
-const port = Number(process.env.PROD_DB_PORT || "5432")
+  constructor() {
+    super();
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(morgan("dev"));
+    this.app.use(cors());
+    this.dbConnect();
 
-app.use(cors());
-app.use(express.json());
+    this.listen();
 
+    this.app.get("/", (req, res) => {
+      res.send("Welcome to this API REST made with Node.js and TypeScript 🚀");
+    });
+  }
 
-AppDataSource.initialize()
-  .then(async () => {
-    app.listen(port, () => {});
-  })
-  .catch((error) => console.log(error));
+  public listen() {
+    this.app.listen(this.port, () => {
+      console.log(`Server running on port ${this.port}`);
+    });
+  }
+
+  async dbConnect(): Promise<DataSource | void> {
+    return this.initConnect
+      .then(() => console.log("Database connected ⚙️"))
+      .catch((error) => console.log(error));
+  }
+}
+
+new ServerBootstrap();
