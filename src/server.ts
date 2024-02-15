@@ -7,7 +7,7 @@ import { ConfigServer } from "./libs";
 
 class ServerBootstrap extends ConfigServer {
   public app: express.Application = express();
-  private port: number = this.getNumberEnv("PORT");
+  private port: number = this.getNumberEnv("PROD_DB_PORT");
 
   constructor() {
     super();
@@ -20,7 +20,7 @@ class ServerBootstrap extends ConfigServer {
     this.listen();
 
     this.app.get("/", (req, res) => {
-      res.send("Welcome to this API REST made with Node.js and TypeScript 🚀");
+      res.send("Welcome to the Collar Club API REST made with Node.js and TypeScript 🚀");
     });
   }
 
@@ -38,3 +38,6 @@ class ServerBootstrap extends ConfigServer {
 }
 
 new ServerBootstrap();
+
+// "start": "ts-node src/server.ts",
+// "typeorm": "typeorm-ts-node-commonjs"
