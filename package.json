@@ -27,7 +27,7 @@
    },
    "scripts": {
       "build": "tsc",
-      "start": "tsc && node dist/src/server.js",
+      "start": "tsc && node dist/server.js",
       "start:dev": "tsc && concurrently \"tsc -w\" \"nodemon dist/server.js\"",
       "start:prod": "cross-env NODE_ENV=production node dist/server.js",
       "typeorm": "npx typeorm-ts-node-commonjs --dataSource src/libs/data-source.ts"
