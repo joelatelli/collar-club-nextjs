@@ -38,6 +38,3 @@ class ServerBootstrap extends ConfigServer {
 }
 
 new ServerBootstrap();
-
-// "start": "ts-node src/server.ts",
-// "typeorm": "typeorm-ts-node-commonjs"
