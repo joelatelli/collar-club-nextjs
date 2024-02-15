@@ -4,6 +4,21 @@ import { User } from "./entity/User"
 
 require('dotenv').config();
 
+// export const AppDataSource = new DataSource({
+//     type: "postgres",
+//     url: process.env.DATABASE_URL,
+//     synchronize: true,
+//     logging: true,
+//     entities: [User],
+//     migrations: [],
+//     subscribers: [],
+//     extra: {
+//         ssl: {
+//           rejectUnauthorized: false,
+//         },
+//     },
+// });
+
 export const AppDataSource = new DataSource({
     type: "postgres",
     host: process.env.PROD_DB_HOSTNAME,
@@ -16,6 +31,11 @@ export const AppDataSource = new DataSource({
     entities: [User],
     migrations: [],
     subscribers: [],
+    extra: {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+    },
 });
 
 // export const AppDataSource = new DataSource({
