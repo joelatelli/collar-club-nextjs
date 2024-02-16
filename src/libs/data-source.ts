@@ -12,7 +12,7 @@ dotenv.config({
 const Config: DataSourceOptions = {
   type: "postgres",
   url: process.env.DATABASE_URL,
-  entities: [__dirname + "dist/**/*.entity{.ts,.js}"],
+  entities: [__dirname + "dist/**/*.entity{.ts,.js}}"],
   migrations: [__dirname + "dist/migrations/*{.ts,.js}"],
   synchronize: false,
   migrationsRun: true,
