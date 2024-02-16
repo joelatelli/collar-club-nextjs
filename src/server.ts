@@ -46,7 +46,7 @@ class ServerBootstrap extends ConfigServer {
     //   new OrderRouter().router,
     //   new ProductRouter().router,
     //   new CustomerRouter().router,
-    //   new CategoryRouter().router,
+      new CategoryRouter().router,
     //   new ProductOrderRouter().router,
     //   new ProfileRouter().router,
       new EventRouter().router,
