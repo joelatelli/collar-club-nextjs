@@ -4,6 +4,12 @@ import { DataSource } from "typeorm";
 import morgan from "morgan";
 import cors from "cors";
 import { ConfigServer } from "./libs";
+import { UserRouter } from "./user";
+import { ProductOrderRouter, OrderRouter } from "./order";
+import { ProductRouter } from "./product";
+import { CustomerRouter } from "./customer";
+import { CategoryRouter } from "./category";
+import { ProfileRouter } from "./profile";
 
 const PORT = process.env.PORT || 3000
 
@@ -30,9 +36,18 @@ class ServerBootstrap extends ConfigServer {
     this.app.listen(PORT, () => {
         console.log(`Server running on port ${ PORT }`);
     })
-    // this.app.listen(this.port, () => {
-    //   console.log(`Server running on port ${this.port}`);
-    // });
+  }
+
+  routers(): Array<express.Router> {
+    return [
+      new UserRouter().router,
+      new OrderRouter().router,
+      new ProductRouter().router,
+      new CustomerRouter().router,
+      new CategoryRouter().router,
+      new ProductOrderRouter().router,
+      new ProfileRouter().router,
+    ];
   }
 
   async dbConnect(): Promise<DataSource | void> {
