@@ -31,7 +31,7 @@
       "start:dev": "tsc && concurrently \"tsc -w\" \"nodemon dist/server.js\"",
       "start:prod": "cross-env NODE_ENV=production node dist/server.js",
       "typeorm": "npx typeorm-ts-node-commonjs --dataSource src/libs/data-source.ts",
-      "migration:gen": "npm run typeorm migration:generate",
+      "migration:generate": "npm run typeorm migration:generate",
       "migration:run": "npm run typeorm migration:run"
    }
 }
