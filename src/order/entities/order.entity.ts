@@ -3,7 +3,7 @@ import { BaseEntity } from "../../libs";
 import { CustomerEntity } from "../../customer";
 import { ProductOrderEntity } from "./product-order.entity";
 
-@Entity({ name: "purchases" })
+@Entity({ name: "orders" })
 export class OrderEntity extends BaseEntity {
 
     @PrimaryGeneratedColumn('uuid')
