@@ -1,26 +1,30 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { BaseEntity } from "../../libs";
 import { CategoryEntity } from "../../category";
 import { ProductOrderEntity } from "../../order";
 
 @Entity({ name: "products" })
 export class ProductEntity extends BaseEntity {
-  @Column()
-  productName!: string;
 
-  @Column()
-  description!: string;
+    @PrimaryGeneratedColumn('uuid')
+    id!: string;
 
-  @Column()
-  price!: number;
+    @Column()
+    productName!: string;
 
-  @ManyToOne(() => CategoryEntity, (category) => category.products)
-  @JoinColumn({ name: "category_id" })
-  category!: CategoryEntity;
+    @Column()
+    description!: string;
 
-  @OneToMany(
-    () => ProductOrderEntity,
-    (productOrder) => productOrder.product
-  )
-  productOrder!: ProductOrderEntity[];
+    @Column()
+    price!: number;
+
+    @ManyToOne(() => CategoryEntity, (category) => category.products)
+    @JoinColumn({ name: "category_id" })
+    category!: CategoryEntity;
+
+    @OneToMany(
+        () => ProductOrderEntity,
+        (productOrder) => productOrder.product
+    )
+    productOrder!: ProductOrderEntity[];
 }

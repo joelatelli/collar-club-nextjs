@@ -1,19 +1,36 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { BaseEntity } from "../../libs";
 import { CustomerEntity } from "../../customer";
 
 @Entity({ name: "profiles" })
 export class ProfileEntity extends BaseEntity {
-  @Column()
-  productName!: string;
 
-  @Column()
-  description!: string;
+    @PrimaryGeneratedColumn('uuid')
+    id!: string;
 
-  @Column()
-  price!: number;
+    @Column()
+    name!: string;
 
-  @ManyToOne(() => CustomerEntity, (customer) => customer.profiles)
-  @JoinColumn({ name: "customer_id" })
-  customer!: CustomerEntity;
+    @Column()
+    age!: string;
+
+    @Column()
+    breed!: string;
+
+    @Column()
+    weight!: string;
+
+    @Column()
+    temperment!: string;
+
+    @Column()
+    specialNeeds!: string;
+
+    @Column()
+    lastVaccinated!: string;
+
+    @ManyToOne(() => CustomerEntity, (customer) => customer.profiles)
+    @JoinColumn({ name: "customer_id" })
+    customer!: CustomerEntity;
+    
 }

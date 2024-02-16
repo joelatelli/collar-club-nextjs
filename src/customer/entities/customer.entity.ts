@@ -1,19 +1,24 @@
-import { Column, Entity, JoinColumn, OneToMany, OneToOne } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { BaseEntity } from "../../libs";
 import { OrderEntity } from "../../order";
 import { ProfileEntity } from "../../profile";
 
 @Entity({ name: "customers" })
 export class CustomerEntity extends BaseEntity {
-  @Column()
-  address!: string;
 
-  @Column()
-  dni!: number;
+    @PrimaryGeneratedColumn('uuid')
+    id!: string;
 
-  @OneToMany(() => OrderEntity, (order) => order.customer)
-  orders!: OrderEntity[];
+    @Column()
+    address!: string;
 
-  @OneToMany(() => ProfileEntity, (profile) => profile.customer)
-  profiles!: ProfileEntity[];
+    @Column()
+    dni!: number;
+
+    @OneToMany(() => OrderEntity, (order) => order.customer)
+    orders!: OrderEntity[];
+
+    @OneToMany(() => ProfileEntity, (profile) => profile.customer)
+    profiles!: ProfileEntity[];
+    
 }

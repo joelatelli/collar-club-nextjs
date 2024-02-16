@@ -10,6 +10,7 @@ import { ProductRouter } from "./product";
 import { CustomerRouter } from "./customer";
 import { CategoryRouter } from "./category";
 import { ProfileRouter } from "./profile";
+import { EventRouter } from "./event";
 
 const PORT = process.env.PORT || 3000
 
@@ -47,6 +48,7 @@ class ServerBootstrap extends ConfigServer {
       new CategoryRouter().router,
       new ProductOrderRouter().router,
       new ProfileRouter().router,
+      new EventRouter().router,
     ];
   }
 
