@@ -26,7 +26,7 @@ class ServerBootstrap extends ConfigServer {
         this.app.use(cors());
         this.dbConnect();
 
-        this.app.use("/api", this.routers());
+        // this.app.use("/api", this.routers());
         this.listen();
 
         this.app.get("/", (req, res) => {
@@ -38,7 +38,7 @@ class ServerBootstrap extends ConfigServer {
         this.app.listen(PORT, () => {
             console.log(`Server running on port ${ PORT }`);
         })
-  }
+    }
 
   routers(): Array<express.Router> {
     return [
