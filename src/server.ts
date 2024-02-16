@@ -15,28 +15,28 @@ import { EventRouter } from "./event";
 const PORT = process.env.PORT || 3000
 
 class ServerBootstrap extends ConfigServer {
-  public app: express.Application = express();
-  private port: number = this.getNumberEnv("PROD_DB_PORT");
+    public app: express.Application = express();
+    private port: number = this.getNumberEnv("PROD_DB_PORT");
 
-  constructor() {
-    super();
-    this.app.use(express.json());
-    this.app.use(express.urlencoded({ extended: true }));
-    this.app.use(morgan("dev"));
-    this.app.use(cors());
-    this.dbConnect();
+    constructor() {
+        super();
+        this.app.use(express.json());
+        this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(morgan("dev"));
+        this.app.use(cors());
+        this.dbConnect();
 
-    this.listen();
+        this.listen();
 
-    this.app.get("/", (req, res) => {
-      res.send("Welcome to the Collar Club API REST made with Node.js and TypeScript 🚀");
-    });
-  }
+        this.app.get("/", (req, res) => {
+        res.send("Welcome to the Collar Club API REST made with Node.js and TypeScript 🚀");
+        });
+    }
 
-  public listen() {
-    this.app.listen(PORT, () => {
-        console.log(`Server running on port ${ PORT }`);
-    })
+    public listen() {
+        this.app.listen(PORT, () => {
+            console.log(`Server running on port ${ PORT }`);
+        })
   }
 
   routers(): Array<express.Router> {
