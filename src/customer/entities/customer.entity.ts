@@ -6,9 +6,6 @@ import { ProfileEntity } from "../../profile";
 @Entity({ name: "customers" })
 export class CustomerEntity extends BaseEntity {
 
-    @PrimaryGeneratedColumn('uuid')
-    id!: string;
-
     @Column()
     address!: string;
 
@@ -20,5 +17,5 @@ export class CustomerEntity extends BaseEntity {
 
     @OneToMany(() => ProfileEntity, (profile) => profile.customer)
     profiles!: ProfileEntity[];
-    
+
 }

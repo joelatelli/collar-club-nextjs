@@ -5,9 +5,6 @@ import { ProductOrderEntity } from "./product-order.entity";
 
 @Entity({ name: "orders" })
 export class OrderEntity extends BaseEntity {
-
-    @PrimaryGeneratedColumn('uuid')
-    id!: string;
     
     @Column()
     status!: string;

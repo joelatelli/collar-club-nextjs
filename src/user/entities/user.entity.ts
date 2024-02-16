@@ -7,9 +7,6 @@ import { EventEntity } from "../../event";
 @Entity({ name: "users" })
 export class UserEntity extends BaseEntity {
 
-  @PrimaryGeneratedColumn('uuid')
-  id!: string;
-
   @Column()
   username!: string;
 

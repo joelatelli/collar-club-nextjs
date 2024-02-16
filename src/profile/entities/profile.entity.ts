@@ -5,9 +5,6 @@ import { CustomerEntity } from "../../customer";
 @Entity({ name: "profiles" })
 export class ProfileEntity extends BaseEntity {
 
-    @PrimaryGeneratedColumn('uuid')
-    id!: string;
-
     @Column()
     name!: string;
 
