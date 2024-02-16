@@ -26,11 +26,11 @@ class ServerBootstrap extends ConfigServer {
         this.app.use(cors());
         this.dbConnect();
 
-        // this.app.use("/api", this.routers());
+        this.app.use("/api", this.routers());
         this.listen();
 
         this.app.get("/", (req, res) => {
-        res.send("Welcome to the Collar Club API REST made with Node.js and TypeScript 🚀");
+            res.send("Welcome to the Collar Club API REST made with Node.js and TypeScript 🚀");
         });
     }
 
@@ -43,13 +43,13 @@ class ServerBootstrap extends ConfigServer {
   routers(): Array<express.Router> {
     return [
       new UserRouter().router,
-      new OrderRouter().router,
-      new ProductRouter().router,
-      new CustomerRouter().router,
-      new CategoryRouter().router,
-      new ProductOrderRouter().router,
-      new ProfileRouter().router,
-      new EventRouter().router,
+    //   new OrderRouter().router,
+    //   new ProductRouter().router,
+    //   new CustomerRouter().router,
+    //   new CategoryRouter().router,
+    //   new ProductOrderRouter().router,
+    //   new ProfileRouter().router,
+    //   new EventRouter().router,
     ];
   }
 
