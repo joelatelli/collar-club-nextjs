@@ -16,5 +16,4 @@ export class Feb16202411411708144925655 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "customers" ALTER COLUMN "phone_number" SET NOT NULL`);
         await queryRunner.query(`ALTER TABLE "customers" ALTER COLUMN "last_name" SET NOT NULL`);
     }
-
 }

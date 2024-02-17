@@ -38,5 +38,4 @@ export class YourMigrationName1708123579808 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE "profiles"`);
         await queryRunner.query(`DROP TABLE "events"`);
     }
-
 }

@@ -12,5 +12,4 @@ export class Feb16202411261708144042570 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "users" RENAME COLUMN "last_name" TO "lastname"`);
         await queryRunner.query(`ALTER TABLE "customers" RENAME COLUMN "last_name" TO "lastname"`);
     }
-
 }

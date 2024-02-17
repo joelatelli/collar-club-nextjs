@@ -17,4 +17,5 @@ export class Feb1720241041708150001595 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "product_orders" ADD "total_price" integer NOT NULL`);
     }
 
+    
 }
