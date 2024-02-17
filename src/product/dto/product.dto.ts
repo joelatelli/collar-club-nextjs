@@ -14,4 +14,7 @@ export class ProductDTO extends BaseDTO {
 
   @IsNotEmpty()
   imageURL!: string;
+
+  @IsNotEmpty()
+  categoryId!: string;
 }
