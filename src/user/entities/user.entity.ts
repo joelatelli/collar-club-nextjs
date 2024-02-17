@@ -17,7 +17,7 @@ export class UserEntity extends BaseEntity {
     @Column()
     firstName!: string;
 
-    @Column()
+    @Column({ nullable: true })
     lastName?: string;
 
     @Index()
@@ -30,11 +30,11 @@ export class UserEntity extends BaseEntity {
     @Length(6, 255)
     password!: string;
 
-    @Column()
+    @Column({ nullable: true })
     phoneNumber?: string;
 
     @Column({ default: false, nullable: false })
-    isVerified?: boolean;
+    isVerified!: boolean;
 
     @Column({ default: '' })
     avatarImageUrl?: string;
