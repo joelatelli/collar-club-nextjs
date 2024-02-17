@@ -1,6 +1,7 @@
 import { IsNotEmpty } from "class-validator";
 import { CustomerEntity } from "../../customer";
 import { BaseDTO } from "../../libs";
+import { ProductOrderDTO } from "./product.order.dto";
 
 export class OrderDTO extends BaseDTO {
   @IsNotEmpty()
@@ -10,8 +11,8 @@ export class OrderDTO extends BaseDTO {
   paymentMethod!: string;
 
   @IsNotEmpty()
-  customer!: CustomerEntity;
+  customerId!: string;
 
   @IsNotEmpty()
-  products!: []
+  products!: [ProductOrderDTO]
 }

@@ -6,12 +6,15 @@ import { ProductEntity } from "../../product";
 export class ProductOrderDTO extends BaseDTO {
 
   @IsNotEmpty()
-  quantityProduct!: number;
-
-  @IsOptional()
-  totalPrice?: number;
+  quantity!: number;
 
   @IsNotEmpty()
-  productID?: string
+  totalPrice!: number;
+
+  @IsNotEmpty()
+  size!: string;
+
+  @IsNotEmpty()
+  productId!: string
   
 }

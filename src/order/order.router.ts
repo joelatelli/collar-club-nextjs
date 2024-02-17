@@ -7,20 +7,20 @@ export class OrderRouter extends BaseRouter<OrderController> {
   }
 
   routes(): void {
-    this.router.get("/purchases", (req, res) =>
-      this.controller.getPurchases(req, res)
+    this.router.get("/orders", (req, res) =>
+      this.controller.getOrders(req, res)
     );
-    this.router.get("/purchase/:id", (req, res) =>
-      this.controller.getPurchaseById(req, res)
+    this.router.get("/order/:id", (req, res) =>
+      this.controller.getOrderById(req, res)
     );
-    this.router.post("/create-purchase", (req, res) =>
-      this.controller.createPurchase(req, res)
+    this.router.post("/create-order", (req, res) =>
+      this.controller.createOrder(req, res)
     );
-    this.router.put("/updatep-purchase/:id", (req, res) =>
-      this.controller.updatePurchase(req, res)
+    this.router.put("/update-order/:id", (req, res) =>
+      this.controller.updateOrder(req, res)
     );
-    this.router.delete("/delete-purchase/:id", (req, res) =>
-      this.controller.deletePurchase(req, res)
+    this.router.delete("/delete-order/:id", (req, res) =>
+      this.controller.deleteOrder(req, res)
     );
   }
 }
