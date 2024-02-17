@@ -13,7 +13,7 @@ export class ProductEntity extends BaseEntity {
     @Column()
     desc!: string;
 
-    @Column()
+    @Column({ type: "decimal" })
     price!: number;
 
     @Column()

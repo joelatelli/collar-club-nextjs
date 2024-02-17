@@ -9,7 +9,7 @@ export class ProductOrderEntity extends BaseEntity {
   @Column()
   quantity!: number;
 
-  @Column()
+  @Column({ type: "decimal" })
   totalPrice!: number;
 
   @Column()
