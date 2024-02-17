@@ -33,7 +33,7 @@ export class ProductController {
       console.error(e);
     }
   }
-
+  
   async updateProduct(req: Request, res: Response) {
     const { id } = req.params;
     try {

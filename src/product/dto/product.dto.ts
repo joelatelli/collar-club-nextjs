@@ -4,14 +4,14 @@ import { CategoryEntity } from "../../category";
 
 export class ProductDTO extends BaseDTO {
   @IsNotEmpty()
-  productName!: string;
+  name!: string;
 
   @IsNotEmpty()
-  description!: string;
+  desc!: string;
 
   @IsNotEmpty()
   price!: number;
 
   @IsNotEmpty()
-  category!: CategoryEntity;
+  imageURL!: string;
 }
