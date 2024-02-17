@@ -2,26 +2,30 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 import { BaseEntity } from "../../libs";
 import { CategoryEntity } from "../../category";
 import { ProductOrderEntity } from "../../order";
+import { FavoriteEntity } from "../../favorite";
 
 @Entity({ name: "products" })
 export class ProductEntity extends BaseEntity {
 
     @Column()
-    productName!: string;
+    name!: string;
 
     @Column()
-    description!: string;
+    desc!: string;
 
     @Column()
     price!: number;
+
+    @Column()
+    imageURL!: string;
 
     @ManyToOne(() => CategoryEntity, (category) => category.products)
     @JoinColumn({ name: "category_id" })
     category!: CategoryEntity;
 
-    @OneToMany(
-        () => ProductOrderEntity,
-        (productOrder) => productOrder.product
-    )
+    @OneToMany( () => ProductOrderEntity, (productOrder) => productOrder.product)
     productOrder!: ProductOrderEntity[];
+
+    @OneToMany(() => FavoriteEntity, (favorite) => favorite.product)
+    favorites!: FavoriteEntity[];
 }

@@ -1,38 +1,59 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, Index } from "typeorm";
 import { BaseEntity } from "../../libs";
 import { Exclude } from "class-transformer";
 import { RoleType } from "../../types";
 import { EventEntity } from "../../event";
+import { IsEmail, Length } from "class-validator";
+import bcrypt from 'bcryptjs';
 
 @Entity({ name: "users" })
 export class UserEntity extends BaseEntity {
 
-  @Column()
-  username!: string;
+    @Index()
+    @Length(3, 255, { message: "Username must be at least 3 characters long" })
+    @Column()
+    username!: string;
 
-  @Column()
-  name!: string;
+    @Column()
+    firstName!: string;
 
-  @Column()
-  lastname!: string;
+    @Column()
+    lastname?: string;
 
-  @Column()
-  email!: string;
+    @Index()
+    @IsEmail()
+    @Column({ unique: true})
+    email!: string;
 
-  @Exclude()
-  @Column()
-  password!: string;
+    @Exclude()
+    @Column()
+    @Length(6, 255)
+    password!: string;
 
-  @Column()
-  city!: string;
+    @Column()
+    phoneNumber?: string;
 
-  @Column()
-  province!: string;
+    @Column({ default: false, nullable: false })
+    isVerified?: boolean;
 
-  @Column({ type: "enum", enum: RoleType, nullable: false })
-  role!: RoleType;
+    @Column({ default: '' })
+    avatarImageUrl?: string;
 
-  @OneToMany(() => EventEntity, (event) => event.creator)
-  events!: EventEntity[];
+    @Column({ nullable: true })
+    resetPasswordToken?: string;
+
+    @Column({ type: "enum", enum: RoleType, nullable: false })
+    role!: RoleType;
+
+    @OneToMany(() => EventEntity, (event) => event.creator)
+    events!: EventEntity[];
+
+    hashPassword() {
+        this.password = bcrypt.hashSync(this.password, 8);
+    }
+    
+    checkIfPasswordMatch(unencryptedPassword: string) {
+        return bcrypt.compareSync(unencryptedPassword, this.password);
+    }
 
 }

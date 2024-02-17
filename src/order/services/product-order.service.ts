@@ -31,7 +31,7 @@ export class ProductOrderService extends BaseService<ProductOrderEntity> {
     );
 
     newPurchaseProduct.totalPrice =
-      product!.price * newPurchaseProduct.quantityProduct;
+      product!.price * newPurchaseProduct.quantity;
 
     return (await this.execRepository).save(newPurchaseProduct);
   }

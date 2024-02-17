@@ -3,30 +3,22 @@ import { BaseDTO } from "../../libs";
 import { RoleType } from "../../types";
 
 export class UserDTO extends BaseDTO {
-  @IsString()
-  @IsNotEmpty()
-  name!: string;
+    @IsString()
+    @IsNotEmpty()
+    firstName!: string;
 
-  @IsString()
-  @IsNotEmpty()
-  lastName!: string;
+    @IsString()
+    lastName?: string;
 
-  @IsEmail()
-  @IsNotEmpty()
-  email!: string;
+    @IsEmail()
+    @IsNotEmpty()
+    email!: string;
 
-  @IsString()
-  @IsNotEmpty()
-  password!: string;
+    @IsString()
+    @IsNotEmpty()
+    password!: string;
 
-  @IsString()
-  @IsNotEmpty()
-  city!: string;
+    @IsNotEmpty()
+    role!: RoleType;
 
-  @IsString()
-  @IsNotEmpty()
-  province!: string;
-
-  @IsNotEmpty()
-  role!: RoleType;
 }

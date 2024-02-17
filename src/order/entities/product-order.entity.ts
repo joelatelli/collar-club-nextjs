@@ -5,12 +5,15 @@ import { OrderEntity } from "./order.entity";
 
 @Entity({ name: "product_orders" })
 export class ProductOrderEntity extends BaseEntity {
-  
+
   @Column()
-  quantityProduct!: number;
+  quantity!: number;
 
   @Column()
   totalPrice!: number;
+
+  @Column()
+  size!: string;
 
   @ManyToOne(() => OrderEntity, (order) => order.productOrder)
   @JoinColumn({ name: "order_id" })
