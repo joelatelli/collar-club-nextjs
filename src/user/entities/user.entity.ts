@@ -18,7 +18,7 @@ export class UserEntity extends BaseEntity {
     firstName!: string;
 
     @Column()
-    lastname?: string;
+    lastName?: string;
 
     @Index()
     @IsEmail()

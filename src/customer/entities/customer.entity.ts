@@ -19,7 +19,7 @@ export class CustomerEntity extends BaseEntity {
     firstName!: string;
 
     @Column()
-    lastname?: string;
+    lastName?: string;
 
     @Index()
     @IsEmail()

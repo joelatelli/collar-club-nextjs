@@ -5,6 +5,10 @@ import { RoleType } from "../../types";
 export class UserDTO extends BaseDTO {
     @IsString()
     @IsNotEmpty()
+    username!: string;
+
+    @IsString()
+    @IsNotEmpty()
     firstName!: string;
 
     @IsString()
@@ -20,5 +24,4 @@ export class UserDTO extends BaseDTO {
 
     @IsNotEmpty()
     role!: RoleType;
-
 }
