@@ -11,4 +11,7 @@ export class OrderDTO extends BaseDTO {
 
   @IsNotEmpty()
   customer!: CustomerEntity;
+
+  @IsNotEmpty()
+  products!: []
 }

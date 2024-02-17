@@ -19,21 +19,13 @@ export class ProductService extends BaseService<ProductEntity> {
     return (await this.execRepository).findOne({ where: { id } });
   }
 
-//   async createProduct(body: ProductDTO): Promise<ProductEntity | undefined> {
-//     try {
-//       return (await this.execRepository).save(body);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
-
   async createProduct(body: ProductDTO): Promise<ProductEntity | undefined> {
     try {
         const id = body.categoryId
       // Fetch the category entity based on the provided category_id
 
       const category = await this.categoryService.findCategoryById(id);
-      
+
       if (!category) {
         throw new Error("Category not found");
       }
