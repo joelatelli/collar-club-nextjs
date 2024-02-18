@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { CustomerService } from "../services";
+import jwt from 'jsonwebtoken'
+
 export class CustomerController {
   constructor(
     private readonly customerService: CustomerService = new CustomerService()
@@ -27,7 +29,9 @@ export class CustomerController {
   async createCustomer(req: Request, res: Response) {
     try {
       const data = await this.customerService.createCustomer(req.body);
-      res.status(200).json(data);
+      const email = data.email
+      const token = jwt.sign({ email }, process.env.JWT_SECRET);
+      res.status(200).json(token);
     } catch (e) {
       console.error(e);
     }
