@@ -50,7 +50,34 @@ export class ProfileService extends BaseService<ProfileEntity> {
     return (await this.execRepository).delete({ id });
   }
 
-  async updateProfile(
+//   async updateProfile(
+//     id: string,
+//     infoUpdate: ProfileDTO
+//   ): Promise<UpdateResult> {
+//     const customer = await this.customerService.findCustomerById(infoUpdate.customerId);
+//     if (!customer) {
+//       throw new Error("Customer not found");
+//     }
+  
+//     const profileToUpdate = await this.findProfileById(id);
+//     if (!profileToUpdate) {
+//       throw new Error("Profile not found");
+//     }
+  
+//     // Update profile entity with values from ProfileDTO
+//     profileToUpdate.name = infoUpdate.name;
+//     profileToUpdate.age = infoUpdate.age;
+//     profileToUpdate.breed = infoUpdate.breed;
+//     profileToUpdate.weight = infoUpdate.weight;
+//     profileToUpdate.temperment = infoUpdate.temperment;
+//     profileToUpdate.specialNeeds = infoUpdate.specialNeeds;
+//     profileToUpdate.lastVaccinated = infoUpdate.lastVaccinated;
+//     profileToUpdate.customer = customer;
+  
+//     return (await this.execRepository).update(id, profileToUpdate);
+//   }
+
+async updateProfile(
     id: string,
     infoUpdate: ProfileDTO
   ): Promise<UpdateResult> {
@@ -65,15 +92,17 @@ export class ProfileService extends BaseService<ProfileEntity> {
     }
   
     // Update profile entity with values from ProfileDTO
-    profileToUpdate.name = infoUpdate.name;
-    profileToUpdate.age = infoUpdate.age;
-    profileToUpdate.breed = infoUpdate.breed;
-    profileToUpdate.weight = infoUpdate.weight;
-    profileToUpdate.temperment = infoUpdate.temperment;
-    profileToUpdate.specialNeeds = infoUpdate.specialNeeds;
-    profileToUpdate.lastVaccinated = infoUpdate.lastVaccinated;
-    profileToUpdate.customer = customer;
+    const updatedFields = {
+      name: infoUpdate.name,
+      age: infoUpdate.age,
+      breed: infoUpdate.breed,
+      weight: infoUpdate.weight,
+      temperment: infoUpdate.temperment,
+      specialNeeds: infoUpdate.specialNeeds,
+      lastVaccinated: infoUpdate.lastVaccinated,
+      customer: customer,
+    };
   
-    return (await this.execRepository).update(id, profileToUpdate);
+    return (await this.execRepository).update(id, updatedFields);
   }
 }
