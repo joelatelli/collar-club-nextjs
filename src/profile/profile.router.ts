@@ -7,19 +7,19 @@ export class ProfileRouter extends BaseRouter<ProfileController> {
   }
 
   routes(): void {
-    this.router.get("/products", (req, res) =>
+    this.router.get("/profile", (req, res) =>
       this.controller.getProfiles(req, res)
     );
-    this.router.get("/product/:id", (req, res) =>
+    this.router.get("/profile/:id", (req, res) =>
       this.controller.getProfileById(req, res)
     );
-    this.router.post("/create-product", (req, res) =>
+    this.router.post("/create-profile", (req, res) =>
       this.controller.createProfile(req, res)
     );
-    this.router.put("/update-product/:id", (req, res) =>
+    this.router.put("/update-profile/:id", (req, res) =>
       this.controller.updateProfile(req, res)
     );
-    this.router.delete("/delete-product/:id", (req, res) =>
+    this.router.delete("/delete-profile/:id", (req, res) =>
       this.controller.deleteProfile(req, res)
     );
   }
