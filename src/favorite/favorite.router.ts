@@ -1,7 +1,7 @@
 import { BaseRouter } from "../shared";
 import { FavoriteController } from "./controllers";
 
-export class EventRouter extends BaseRouter<FavoriteController> {
+export class FavoriteRouter extends BaseRouter<FavoriteController> {
   constructor() {
     super(FavoriteController);
   }

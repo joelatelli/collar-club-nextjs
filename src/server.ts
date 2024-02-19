@@ -11,6 +11,7 @@ import { CustomerRouter } from "./customer";
 import { CategoryRouter } from "./category";
 import { ProfileRouter } from "./profile";
 import { EventRouter } from "./event";
+import { FavoriteRouter } from "./favorite";
 
 const PORT = process.env.PORT || 3000
 
@@ -43,6 +44,7 @@ class ServerBootstrap extends ConfigServer {
   routers(): Array<express.Router> {
     return [
       new UserRouter().router,
+      new FavoriteRouter().router,
     //   new OrderRouter().router,
       new ProductRouter().router,
       new CustomerRouter().router,
