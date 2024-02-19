@@ -3,10 +3,13 @@ import { BaseService } from "../../libs";
 import { ProfileEntity } from "../entities";
 import { ProfileDTO } from "../dto";
 import { CategoryService } from "../../category";
+import { CustomerService } from "../../customer";
 
 export class ProfileService extends BaseService<ProfileEntity> {
   constructor(
-    readonly categoryService: CategoryService = new CategoryService()
+    readonly categoryService: CategoryService = new CategoryService(),
+    readonly customerService: CustomerService = new CustomerService()
+
   ) {
     super(ProfileEntity);
   }
@@ -20,8 +23,24 @@ export class ProfileService extends BaseService<ProfileEntity> {
   }
 
   async createProfile(body: ProfileDTO): Promise<ProfileEntity | undefined> {
+
+    const customer = await this.customerService.findCustomerById(body.customerId);
+    if (!customer) {
+      throw new Error("Customer not found");
+    }
+
+    const profile = new ProfileEntity();
+    profile.name = body.name
+    profile.age = body.age
+    profile. breed = body.breed
+    profile.weight = body.weight
+    profile.temperment = body.temperment
+    profile.specialNeeds = body.specialNeeds
+    profile.lastVaccinated = body.lastVaccinated
+    profile.customer = customer
+
     try {
-      return (await this.execRepository).save(body);
+      return (await this.execRepository).save(profile);
     } catch (error) {
       console.error(error);
     }

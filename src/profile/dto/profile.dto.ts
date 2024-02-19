@@ -24,5 +24,5 @@ export class ProfileDTO extends BaseDTO {
     lastVaccinated!: string;
 
     @IsNotEmpty()
-    userId!: string;
+    customerId!: string;
 }
