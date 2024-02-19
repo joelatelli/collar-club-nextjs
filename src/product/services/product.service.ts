@@ -1,12 +1,16 @@
 import { DeleteResult, UpdateResult } from "typeorm";
 import { BaseService } from "../../libs";
 import { ProductEntity } from "../entities";
+import { FavoriteEntity } from "../../favorite/entities";
 import { ProductDTO } from "../dto";
+import { FavoriteDTO } from "../../favorite/dto";
 import { CategoryService } from "../../category";
+import { CustomerService } from "../../customer";
 
 export class ProductService extends BaseService<ProductEntity> {
   constructor(
-    readonly categoryService: CategoryService = new CategoryService()
+    readonly categoryService: CategoryService = new CategoryService(),
+    readonly customerService: CustomerService = new CustomerService()
   ) {
     super(ProductEntity);
   }
@@ -54,5 +58,32 @@ export class ProductService extends BaseService<ProductEntity> {
     infoUpdate: ProductDTO
   ): Promise<UpdateResult> {
     return (await this.execRepository).update(id, infoUpdate);
+  }
+
+  async addFavorite(body: FavoriteDTO): Promise<FavoriteEntity | undefined> {
+    try {
+      // Find customer and product entities
+      const customer = await this.customerService.findCustomerById(body.customerId);
+      if (!customer) {
+        throw new Error("Customer not found");
+      }
+
+      const product = await this.findProductById(body.productId);
+      if (!product) {
+        throw new Error("Product not found");
+      }
+
+      // Create FavoriteEntity instance
+      const favorite = new FavoriteEntity();
+      favorite.customer = customer;
+      favorite.userId = customer.id;
+      favorite.product = product;
+      favorite.productId = product.id;
+
+      // Save favorite entity
+      return (await this.execRepository).save(favorite);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
