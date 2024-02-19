@@ -7,11 +7,14 @@ export class ProfileRouter extends BaseRouter<ProfileController> {
   }
 
   routes(): void {
-    this.router.get("/profile", (req, res) =>
+    this.router.get("/profiles", (req, res) =>
       this.controller.getProfiles(req, res)
     );
     this.router.get("/profile/:id", (req, res) =>
       this.controller.getProfileById(req, res)
+    );
+    this.router.get("/:id/profiles/", (req, res) =>
+      this.controller.getProfilesByCustomerId(req, res)
     );
     this.router.post("/create-profile", (req, res) =>
       this.controller.createProfile(req, res)

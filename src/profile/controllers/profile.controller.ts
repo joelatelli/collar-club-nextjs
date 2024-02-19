@@ -53,4 +53,14 @@ export class ProfileController {
       console.error(e);
     }
   }
+
+  async getProfilesByCustomerId(req: Request, res: Response) {
+    const { id } = req.params;
+    try {
+      const data = await this.profileService.getProfilesByCustomerId(id);
+      res.status(200).json(data);
+    } catch (e) {
+      console.error(e);
+    }
+  }
 }
