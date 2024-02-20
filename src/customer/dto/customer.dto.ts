@@ -22,3 +22,4 @@ export class CustomerDTO extends BaseDTO {
     @IsNotEmpty()
     password!: string;
 }
+
