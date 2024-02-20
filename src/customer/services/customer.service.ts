@@ -12,8 +12,8 @@ import { TokenEntity } from "../entities";
 
 export class CustomerService extends BaseService<CustomerEntity> {
   constructor(
-    // readonly tokenService: TokenService = new TokenService(),
-    // readonly mailService: MailService = new MailService()
+    readonly tokenService: TokenService = new TokenService(),
+    readonly mailService: MailService = new MailService()
   ) {
     super(CustomerEntity);
   }
