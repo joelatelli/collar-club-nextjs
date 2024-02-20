@@ -9,7 +9,6 @@ export class ProfileService extends BaseService<ProfileEntity> {
   constructor(
     readonly categoryService: CategoryService = new CategoryService(),
     readonly customerService: CustomerService = new CustomerService()
-
   ) {
     super(ProfileEntity);
   }
