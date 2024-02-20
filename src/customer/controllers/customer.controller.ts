@@ -29,9 +29,7 @@ export class CustomerController {
   async createCustomer(req: Request, res: Response) {
     try {
       const data = await this.customerService.createCustomer(req.body);
-      const email = data.email
-      const token = jwt.sign({ email }, process.env.JWT_SECRET);
-      res.status(200).json(token);
+      res.status(200).json(data);
     } catch (e) {
       console.error(e);
     }

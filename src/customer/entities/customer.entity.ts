@@ -43,6 +43,9 @@ export class CustomerEntity extends BaseEntity {
     @Column({ nullable: true })
     resetPasswordToken?: string;
 
+    @Column({ nullable: true })
+    activationLink?: string;
+
     @OneToMany(() => OrderEntity, (order) => order.customer)
     orders!: OrderEntity[];
 
