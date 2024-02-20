@@ -41,7 +41,7 @@ export class FavoriteService extends BaseService<FavoriteEntity> {
       // Create FavoriteEntity instance
       const favorite = new FavoriteEntity();
       favorite.customer = customer;
-      favorite.userId = customer.id;
+      favorite.customerId = customer.id;
       favorite.product = product;
       favorite.productId = product.id;
 
