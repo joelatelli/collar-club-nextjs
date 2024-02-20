@@ -60,6 +60,33 @@ export class ProductService extends BaseService<ProductEntity> {
     return (await this.execRepository).update(id, infoUpdate);
   }
 
+//   async addFavorite(body: FavoriteDTO): Promise<FavoriteEntity | undefined> {
+//     try {
+//       // Find customer and product entities
+//       const customer = await this.customerService.findCustomerById(body.customerId);
+//       if (!customer) {
+//         throw new Error("Customer not found");
+//       }
+
+//       const product = await this.findProductById(body.productId);
+//       if (!product) {
+//         throw new Error("Product not found");
+//       }
+
+//       // Create FavoriteEntity instance
+//       const favorite = new FavoriteEntity();
+//       favorite.customer = customer;
+//     //   favorite.customerId = customer.id;
+//       favorite.product = product;
+//     //   favorite.productId = product.id;
+
+//       // Save favorite entity
+//       return (await this.execRepository).save(favorite);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   }
+
   async addFavorite(body: FavoriteDTO): Promise<FavoriteEntity | undefined> {
     try {
       // Find customer and product entities
@@ -67,23 +94,22 @@ export class ProductService extends BaseService<ProductEntity> {
       if (!customer) {
         throw new Error("Customer not found");
       }
-
+  
       const product = await this.findProductById(body.productId);
       if (!product) {
         throw new Error("Product not found");
       }
-
+  
       // Create FavoriteEntity instance
       const favorite = new FavoriteEntity();
       favorite.customer = customer;
-    //   favorite.customerId = customer.id;
       favorite.product = product;
-    //   favorite.productId = product.id;
-
+  
       // Save favorite entity
       return (await this.execRepository).save(favorite);
     } catch (error) {
       console.error(error);
+      throw error; // Re-throw the error to handle it at a higher level
     }
   }
 }
