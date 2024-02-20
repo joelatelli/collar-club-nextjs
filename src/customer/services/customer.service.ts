@@ -30,7 +30,7 @@ export class CustomerService extends BaseService<CustomerEntity> {
     return (await this.execRepository).findOne({ where: { email } });
   }
 
-  // async createCustomer(body: CustomerDTO): Promise<TokenEntity> {
+  async createCustomer(body: CustomerDTO) {
   //   const repository = await this.execRepository;
 
   //   const customer = await this.findCustomerByEmail(body.email);
@@ -61,7 +61,7 @@ export class CustomerService extends BaseService<CustomerEntity> {
   //   (await this.execRepository).save(user);
 
   //   return tokens
-  // }
+  }
 
   async login(body: CustomerDTO): Promise<CustomerEntity> {
     return (await this.execRepository).save(body);
