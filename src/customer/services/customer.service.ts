@@ -12,8 +12,8 @@ import { TokenEntity } from "../entities";
 
 export class CustomerService extends BaseService<CustomerEntity> {
   constructor(
-    readonly tokenService: TokenService = new TokenService(),
-    readonly mailService: MailService = new MailService()
+    // readonly tokenService: TokenService = new TokenService(),
+    // readonly mailService: MailService = new MailService()
   ) {
     super(CustomerEntity);
   }
@@ -30,38 +30,38 @@ export class CustomerService extends BaseService<CustomerEntity> {
     return (await this.execRepository).findOne({ where: { email } });
   }
 
-  async createCustomer(body: CustomerDTO): Promise<TokenEntity> {
-    const repository = await this.execRepository;
+  // async createCustomer(body: CustomerDTO): Promise<TokenEntity> {
+  //   const repository = await this.execRepository;
 
-    const customer = await this.findCustomerByEmail(body.email);
+  //   const customer = await this.findCustomerByEmail(body.email);
 
-    if (!customer) {
-      throw new Error("There is an account using this email already.");
-    }
+  //   if (!customer) {
+  //     throw new Error("There is an account using this email already.");
+  //   }
 
-    const hashPassword = await bcrypt.hash(body.password, 3);
+  //   const hashPassword = await bcrypt.hash(body.password, 3);
 
-    const activationLink = uuidv4();
+  //   const activationLink = uuidv4();
 
-    const user = repository.create({
-      username: body.username,
-      firstName: body.firstName,
-      lastName: body.lastName,
-      email: body.email,
-      password: hashPassword,
-      isVerified: false,
-      activationLink: activationLink,
-    });
+  //   const user = repository.create({
+  //     username: body.username,
+  //     firstName: body.firstName,
+  //     lastName: body.lastName,
+  //     email: body.email,
+  //     password: hashPassword,
+  //     isVerified: false,
+  //     activationLink: activationLink,
+  //   });
 
-    // await this.mailService.sendActivationMail(body.email, `${process.env.DATABASE_URL}/activate/:${activationLink}`);
+  //   // await this.mailService.sendActivationMail(body.email, `${process.env.DATABASE_URL}/activate/:${activationLink}`);
 
-    const tokens = await this.tokenService.createToken(body);
-    await this.tokenService.saveToken(user.id, tokens.refreshToken);
+  //   const tokens = await this.tokenService.createToken(body);
+  //   await this.tokenService.saveToken(user.id, tokens.refreshToken);
 
-    (await this.execRepository).save(user);
+  //   (await this.execRepository).save(user);
 
-    return tokens
-  }
+  //   return tokens
+  // }
 
   async login(body: CustomerDTO): Promise<CustomerEntity> {
     return (await this.execRepository).save(body);

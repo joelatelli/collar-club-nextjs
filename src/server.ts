@@ -45,13 +45,13 @@ class ServerBootstrap extends ConfigServer {
     return [
       new UserRouter().router,
       // new FavoriteRouter().router,
-    //   new OrderRouter().router,
+      // new OrderRouter().router,
       new ProductRouter().router,
       new CustomerRouter().router,
       // new CategoryRouter().router,
-    //   new ProductOrderRouter().router,
+      // new ProductOrderRouter().router,
       new ProfileRouter().router,
-    //   new EventRouter().router,
+      // new EventRouter().router,
     ];
   }
 
