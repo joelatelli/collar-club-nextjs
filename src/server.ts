@@ -44,10 +44,10 @@ class ServerBootstrap extends ConfigServer {
   routers(): Array<express.Router> {
     return [
       new UserRouter().router,
-    //   new FavoriteRouter().router,
+      new FavoriteRouter().router,
     //   new OrderRouter().router,
       new ProductRouter().router,
-      new CustomerRouter().router,
+      // new CustomerRouter().router,
       new CategoryRouter().router,
     //   new ProductOrderRouter().router,
       new ProfileRouter().router,
