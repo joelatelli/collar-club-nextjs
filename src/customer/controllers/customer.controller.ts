@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { CustomerService } from "../services";
+import jwt from 'jsonwebtoken'
 
 export class CustomerController {
   constructor(
