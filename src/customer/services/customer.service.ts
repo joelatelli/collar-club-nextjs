@@ -7,14 +7,13 @@ import { TokenService } from "../../token";
 import { MailService } from "./mail.service";
 import { CustomerDTO } from "../dto";
 import { CustomerEntity } from "../entities";
-import { TokenEntity } from "../../token/entities";
 import { ProductEntity } from "../../product";
 import { OrderEntity } from "../../order";
 
 
 export class CustomerService extends BaseService<CustomerEntity> {
   constructor(
-    readonly tokenService: TokenService = new TokenService(TokenEntity)
+    readonly tokenService: TokenService = new TokenService()
     // readonly mailService: MailService = new MailService()
   ) {
     super(CustomerEntity);
