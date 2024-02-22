@@ -59,7 +59,7 @@ export class CustomerService extends BaseService<CustomerEntity> {
     // const tokens = await this.tokenService.createToken(body);
 
     const savedUser = (await this.execRepository).save(user);
-    const tokens = await this.tokenService.saveToken(savedUser);
+    const tokens = await this.tokenService.saveToken(await savedUser);
 
     return tokens
   }
