@@ -14,7 +14,6 @@ import { OrderEntity } from "../../order";
 export class CustomerService extends BaseService<CustomerEntity> {
   constructor(
     readonly tokenService: TokenService = new TokenService()
-
     // readonly mailService: MailService = new MailService()
   ) {
     super(CustomerEntity);
@@ -56,11 +55,11 @@ export class CustomerService extends BaseService<CustomerEntity> {
     });
 
     // await this.mailService.sendActivationMail(body.email, `${process.env.DATABASE_URL}/activate/:${activationLink}`);
+    
+    // const tokens = await this.tokenService.createToken(body);
 
-    const tokens = await this.tokenService.createToken(body);
-    await this.tokenService.saveToken(user.id, tokens.refreshToken);
-
-    (await this.execRepository).save(user);
+    const savedUser = (await this.execRepository).save(user);
+    const tokens = await this.tokenService.saveToken(savedUser);
 
     return tokens
   }
