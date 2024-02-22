@@ -14,7 +14,7 @@ import { OrderEntity } from "../../order";
 export class CustomerService extends BaseService<CustomerEntity> {
   constructor(
     readonly tokenService: TokenService = new TokenService()
-    
+
     // readonly mailService: MailService = new MailService()
   ) {
     super(CustomerEntity);
@@ -37,7 +37,7 @@ export class CustomerService extends BaseService<CustomerEntity> {
 
     const customer = await this.findCustomerByEmail(body.email);
 
-    if (!customer) {
+    if (customer) {
       throw new Error("There is an account using this email already.");
     }
 
