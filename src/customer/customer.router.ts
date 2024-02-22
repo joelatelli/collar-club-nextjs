@@ -24,4 +24,3 @@ export class CustomerRouter extends BaseRouter<CustomerController> {
     );
   }
 }
-

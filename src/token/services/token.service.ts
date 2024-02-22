@@ -4,9 +4,9 @@ import { BaseService } from "../../libs";
 import { TokenEntity } from "../entities";
 
 export class TokenService extends BaseService<TokenEntity> {
-  constructor() {
-    super(TokenEntity)
-  }
+//   constructor() {
+//     super(TokenEntity)
+//   }
   
   async createToken(body: any): Promise<TokenEntity> {
     return (await this.execRepository).save(body);
@@ -24,5 +24,4 @@ export class TokenService extends BaseService<TokenEntity> {
 
     return await repository.save(tokenData);
   }
-  
 }
