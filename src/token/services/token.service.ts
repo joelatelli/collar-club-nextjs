@@ -24,4 +24,5 @@ export class TokenService extends BaseService<TokenEntity> {
 
     return await repository.save(tokenData);
   }
+  
 }

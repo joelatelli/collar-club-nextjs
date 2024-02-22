@@ -3,16 +3,18 @@ import { v4 as uuidv4 } from "uuid";
 
 import { DeleteResult, UpdateResult } from "typeorm";
 import { BaseService } from "../../libs";
-import { TokenService } from "../../token/services";
+import { TokenService } from "../../token";
 import { MailService } from "./mail.service";
 import { CustomerDTO } from "../dto";
 import { CustomerEntity } from "../entities";
 import { TokenEntity } from "../../token/entities";
+import { ProductEntity } from "../../product";
+import { OrderEntity } from "../../order";
 
 
 export class CustomerService extends BaseService<CustomerEntity> {
   constructor(
-    // readonly tokenService: TokenService = new TokenService()
+    readonly tokenService: TokenService = new TokenService()
     // readonly mailService: MailService = new MailService()
   ) {
     super(CustomerEntity);
@@ -76,5 +78,35 @@ export class CustomerService extends BaseService<CustomerEntity> {
     infoUpdate: CustomerDTO
   ): Promise<UpdateResult> {
     return (await this.execRepository).update(id, infoUpdate);
+  }
+
+  async findCustomersFavoriteProducts(id: string): Promise<ProductEntity[]> {
+    const customer = await this.findCustomerById(id);
+    if (!customer) {
+        throw new Error("Customer not found");
+    }
+    return customer.favoriteProducts.map(favorite => favorite.product);
+  }
+
+  async findCustomersOrders(id: string): Promise<OrderEntity[]> {
+    const customer = await this.findCustomerByIdWithOrders(id);
+    if (!customer) {
+        throw new Error("Customer not found");
+    }
+    return customer.orders;
+  }
+
+  async findCustomerByIdWithProducts(id: string): Promise<CustomerEntity | null> {
+    return (await this.execRepository).findOne({ 
+        where: { id },
+        relations: ["favoriteProducts"] // Specify the relation to be eagerly loaded
+    });
+  }
+
+  async findCustomerByIdWithOrders(id: string): Promise<CustomerEntity | null> {
+    return (await this.execRepository).findOne({ 
+        where: { id },
+        relations: ["orders"] // Specify the relation to be eagerly loaded
+    });
   }
 }

@@ -24,7 +24,6 @@ const Hero: React.FC = () => (
       </p>
 
     </div>
-
   </section>
 );
 
