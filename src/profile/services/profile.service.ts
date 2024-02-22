@@ -2,7 +2,6 @@ import { DeleteResult, UpdateResult } from "typeorm";
 import { BaseService } from "../../libs";
 import { ProfileEntity } from "../entities";
 import { ProfileDTO } from "../dto";
-import { CategoryService } from "../../category";
 import { CustomerService } from "../../customer";
 
 export class ProfileService extends BaseService<ProfileEntity> {
