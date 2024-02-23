@@ -23,3 +23,12 @@ export class CustomerDTO extends BaseDTO {
     password!: string;
 }
 
+export class LoginDTO extends BaseDTO {
+    @IsEmail()
+    @IsNotEmpty()
+    email!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    password!: string;
+}

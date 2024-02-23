@@ -4,8 +4,9 @@ import { v4 as uuidv4 } from "uuid";
 import { DeleteResult, UpdateResult } from "typeorm";
 import { BaseService } from "../../libs";
 import { TokenService } from "../../token";
+import { TokenEntity } from "../../token";
 import { MailService } from "./mail.service";
-import { CustomerDTO } from "../dto";
+import { CustomerDTO, LoginDTO } from "../dto";
 import { CustomerEntity } from "../entities";
 import { ProductEntity } from "../../product";
 import { OrderEntity } from "../../order";
@@ -64,8 +65,21 @@ export class CustomerService extends BaseService<CustomerEntity> {
     return tokens
   }
 
-  async login(body: CustomerDTO): Promise<CustomerEntity> {
-    return (await this.execRepository).save(body);
+  async login(body: LoginDTO): Promise<string> {
+    const { email, password } = body;
+
+    // Find the customer by email
+    const customer = await this.findCustomerByEmail(email);
+
+    // If no customer found or password doesn't match, throw an error
+    if (!customer || !(await bcrypt.compare(password, customer.password))) {
+      throw new Error("Invalid email or password");
+    }
+
+    // If email and password combination is correct, generate and save token
+    const tokens = await this.tokenService.saveToken(customer);
+
+    return tokens.accessToken;
   }
 
   async deleteCustomer(id: string): Promise<DeleteResult> {

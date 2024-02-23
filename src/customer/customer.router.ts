@@ -25,5 +25,8 @@ export class CustomerRouter extends BaseRouter<CustomerController> {
     this.router.get("/auth/:id", (req, res) =>
       this.controller.getCustomerByToken(req, res)
     );
+    this.router.get("/login", (req, res) =>
+    this.controller.login(req, res)
+    );
   }
 }
