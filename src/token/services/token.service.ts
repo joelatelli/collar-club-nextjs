@@ -54,4 +54,11 @@ export class TokenService extends BaseService<TokenEntity> {
             process.env.JWT_SECRET!
           );
     }
+
+    async findCustomerByAccessToken(accessToken: string): Promise<CustomerEntity | null> {
+        const repository = await this.execRepository;
+        const token = await repository.findOne({ where: { accessToken }, relations: ["customer"] });
+        return token ? token.customer : null;
+      }
+    
 }

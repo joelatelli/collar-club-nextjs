@@ -22,5 +22,8 @@ export class CustomerRouter extends BaseRouter<CustomerController> {
     this.router.delete("/delete-customer/:id", (req, res) =>
       this.controller.deleteCustomer(req, res)
     );
+    this.router.get("/auth/:id", (req, res) =>
+      this.controller.getCustomerByToken(req, res)
+    );
   }
 }

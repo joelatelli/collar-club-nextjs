@@ -108,4 +108,8 @@ export class CustomerService extends BaseService<CustomerEntity> {
         relations: ["orders"] // Specify the relation to be eagerly loaded
     });
   }
+
+  async findCustomerByToken(id: string): Promise<CustomerEntity | null> {
+    return await this.tokenService.findCustomerByAccessToken(id)
+  }
 }

@@ -54,4 +54,14 @@ export class CustomerController {
       console.error(e);
     }
   }
+
+  async getCustomerByToken(req: Request, res: Response) {
+    const { id } = req.params;
+    try {
+      const data = await this.customerService.findCustomerByToken(id);
+      res.status(200).json(data);
+    } catch (e) {
+      console.error(e);
+    }
+  }
 }
