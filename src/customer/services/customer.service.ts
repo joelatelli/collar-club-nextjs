@@ -66,20 +66,32 @@ export class CustomerService extends BaseService<CustomerEntity> {
   }
 
   async login(body: LoginDTO): Promise<string> {
-    const { email, password } = body;
-
-    // Find the customer by email
-    const customer = await this.findCustomerByEmail(email);
-
-    // If no customer found or password doesn't match, throw an error
-    if (!customer || !(await bcrypt.compare(password, customer.password))) {
-      throw new Error("Invalid email or password");
+    try {
+      const { email, password } = body;
+  
+      // Find the customer by email
+      const customer = await this.findCustomerByEmail(email);
+  
+      // If no customer found, throw an error
+      if (!customer) {
+        throw new Error("Invalid email or password");
+      }
+  
+      // Compare the provided password with the hashed password from the database
+      const passwordMatch = await bcrypt.compare(password, customer.password);
+  
+      if (!passwordMatch) {
+        throw new Error("Invalid email or password");
+      }
+  
+      // If email and password combination is correct, generate and save token
+      const tokens = await this.tokenService.saveToken(customer);
+  
+      return tokens.accessToken;
+    } catch (error) {
+      console.error("Login error:", error);
+      throw error; // Rethrow the error for proper handling in the calling function
     }
-
-    // If email and password combination is correct, generate and save token
-    const tokens = await this.tokenService.saveToken(customer);
-
-    return tokens.accessToken;
   }
 
   async deleteCustomer(id: string): Promise<DeleteResult> {
