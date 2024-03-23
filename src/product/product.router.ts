@@ -19,6 +19,9 @@ export class ProductRouter extends BaseRouter<ProductController> {
     this.router.post("/favorite-product", (req, res) =>
       this.controller.favoriteProduct(req, res)
     );
+    this.router.post("product/:id/add-option", (req, res) =>
+      this.controller.addProductOption(req, res)
+    );
     this.router.put("/update-product/:id", (req, res) =>
       this.controller.updateProduct(req, res)
     );

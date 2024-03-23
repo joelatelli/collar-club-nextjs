@@ -12,8 +12,8 @@ export class ProductOrderEntity extends BaseEntity {
   @Column({ type: "decimal" })
   totalPrice!: number;
 
-  @Column()
-  size!: string;
+  // @Column()
+  // size!: string;
 
   @ManyToOne(() => OrderEntity, (order) => order.productOrder)
   @JoinColumn({ name: "order_id" })

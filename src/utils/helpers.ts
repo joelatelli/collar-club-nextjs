@@ -31,3 +31,13 @@ export function cleanSlug(slug) {
   
     return slug;
   }
+
+    // transformer
+export class DecimalColumnTransformer {
+  to(data: number): number {
+      return data;
+  }
+  from(data: string): number {
+      return parseFloat(data);
+  }
+}

@@ -3,6 +3,7 @@ import { BaseEntity } from "../../libs";
 import { CategoryEntity } from "../../category";
 import { ProductOrderEntity } from "../../order";
 import { FavoriteEntity } from "../../favorite";
+import { OptionCategoryEntity } from "./option-category.entity";
 
 @Entity({ name: "products" })
 export class ProductEntity extends BaseEntity {
@@ -28,4 +29,7 @@ export class ProductEntity extends BaseEntity {
 
     @OneToMany(() => FavoriteEntity, (favorite) => favorite.product)
     favorites!: FavoriteEntity[];
+
+    @OneToMany(() => OptionCategoryEntity, (option) => option.product)
+    options!: OptionCategoryEntity[];
 }

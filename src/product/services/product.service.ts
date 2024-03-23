@@ -1,8 +1,8 @@
 import { DeleteResult, UpdateResult } from "typeorm";
-import { BaseService } from "../../libs";
-import { ProductEntity } from "../entities";
+import { AppDataSource, BaseService } from "../../libs";
+import { OptionCategoryEntity, OptionEntity, ProductEntity } from "../entities";
 import { FavoriteEntity } from "../../favorite/entities";
-import { ProductDTO } from "../dto";
+import { OptionCategoryDTO, ProductDTO } from "../dto";
 import { FavoriteDTO } from "../../favorite/dto";
 import { CategoryService } from "../../category";
 import { CustomerService } from "../../customer";
@@ -21,6 +21,13 @@ export class ProductService extends BaseService<ProductEntity> {
 
   async findProductById(id: string): Promise<ProductEntity | null> {
     return (await this.execRepository).findOne({ where: { id } });
+  }
+
+  async findProductByIdWithAll(id: string): Promise<ProductEntity | null> {
+    return (await this.execRepository).findOne({
+      where: { id },
+      relations: ['options', 'options.options']
+    });
   }
 
   async createProduct(body: ProductDTO): Promise<ProductEntity | undefined> {
@@ -47,6 +54,35 @@ export class ProductService extends BaseService<ProductEntity> {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  async createProductOption(body: OptionCategoryDTO): Promise<ProductEntity | null> {
+    
+    const product = await this.findProductById(body.productId);
+
+    if (!product) {
+      throw new Error("Product not found");
+    }
+
+    const newOptionCategory = new OptionCategoryEntity();
+    newOptionCategory.title = body.title
+    newOptionCategory.isOptional = body.isOptional
+    newOptionCategory.product = product
+
+    let optionCategory = await AppDataSource.manager.save(newOptionCategory);
+
+    if (body.options && body.options.length > 0) {
+      for (const option of body.options) {
+        const newOption = new OptionEntity();
+        newOption.category = optionCategory
+        newOption.price = option.price
+        newOption.title = option.title
+    
+        await AppDataSource.manager.save(newOption);
+      }
+    }
+
+    return await this.findProductByIdWithAll(body.productId);
   }
 
   async deleteProduct(id: string): Promise<DeleteResult> {
