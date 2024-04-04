@@ -32,7 +32,7 @@ export class CustomerService extends BaseService<CustomerEntity> {
     return (await this.execRepository).findOne({ where: { email } });
   }
 
-  async createCustomer(body: CustomerDTO) {
+  async createCustomer(body: CustomerDTO): Promise<string> {
     const repository = await this.execRepository;
 
     const customer = await this.findCustomerByEmail(body.email);
@@ -62,7 +62,7 @@ export class CustomerService extends BaseService<CustomerEntity> {
     const savedUser = (await this.execRepository).save(user);
     const tokens = await this.tokenService.saveToken(await savedUser);
 
-    return tokens
+    return tokens.accessToken;
   }
 
   async login(body: LoginDTO): Promise<string> {
